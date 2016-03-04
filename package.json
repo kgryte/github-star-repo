@@ -43,7 +43,8 @@
     "request",
     "api",
     "like",
-    "bookmark"
+    "bookmark",
+    "favorite"
   ],
   "bugs": {
     "url": "https://github.com/kgryte/github-star-repo/issues"
