@@ -1,7 +1,7 @@
 {
 	"name": "github-star-repo",
 	"version": "0.0.0",
-	"description": "Star a Github repository.",
+	"description": "Star a repository.",
 	"author": {
 		"name": "Athan Reines",
 		"email": "kgryte@gmail.com"
