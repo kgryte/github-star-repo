@@ -107,6 +107,6 @@ function clbk( error, info ) {
 		return process.exit( 1 );
 	}
 	str = 'Starred '+slug+'.\n';
-	process.stdout.write( str, 'utf8' );
+	process.stderr.write( str, 'utf8' );
 	process.exit( 0 );
 }
