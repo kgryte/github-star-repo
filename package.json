@@ -13,7 +13,8 @@
 		}
 	],
 	"bin": {
-		"ghstarrepo": "./bin/cli"
+		"ghstar": "./bin/cli",
+		"github-star-repo": "./bin/cli"
 	},
 	"scripts": {
 		"test": "if [ \"${TRAVIS}\" ]; then npm run test-ci; else npm run test-local; fi",
@@ -79,5 +80,5 @@
 			"android-browser/4.2..latest"
 		]
 	},
-  "license": "MIT"
+	"license": "MIT"
 }

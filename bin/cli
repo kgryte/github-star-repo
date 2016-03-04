@@ -1,0 +1,112 @@
+#!/usr/bin/env node
+'use strict';
+
+// MODULES //
+
+var fs = require( 'fs' );
+var path = require( 'path' );
+var parseArgs = require( 'minimist' );
+var notifier = require( 'update-notifier' );
+var pkg = require( './../package.json' );
+var opts = require( './opts.json' );
+var star = require( './../lib' );
+
+
+// VARIABLES //
+
+var token;
+var slug;
+var args;
+
+
+// FUNCTIONS //
+
+/**
+* FUNCTION: onClose()
+*	Callback invoked upon writing a file to `stdout`.
+*
+* @private
+*/
+function onClose() {
+	process.exit( 0 );
+}
+
+
+// INIT //
+
+process.stdout.on( 'error', process.exit );
+
+
+// PACKAGE UPDATES //
+
+notifier( { 'pkg': pkg } ).notify();
+
+
+// ARGUMENTS //
+
+args = parseArgs( process.argv.slice( 2 ), opts );
+
+
+// HELP //
+
+if ( args.help ) {
+	fs.createReadStream( path.join( __dirname, 'usage.txt' ) )
+		.pipe( process.stdout )
+		.on( 'close', onClose );
+    return;
+}
+
+
+// VERSION //
+
+if ( args.version ) {
+	console.log( pkg.version );
+	return;
+}
+
+
+// OPTIONS //
+
+opts = {};
+
+if ( args.token ) {
+	token = args.token;
+}
+else if ( process.env.GITHUB_TOKEN ) {
+	token = process.env.GITHUB_TOKEN;
+}
+if ( token ) {
+	opts.token = token;
+}
+if ( args.useragent ) {
+	opts.useragent = args.useragent;
+}
+
+
+// STAR REPO //
+
+slug = args._[ 0 ];
+star( slug, opts, clbk );
+
+/**
+* FUNCTION: clbk( error, info )
+*	Callback invoked upon starring a repository.
+*
+* @private
+* @param {Error|Null} error - error object
+* @param {Object} info - rate limit info
+* @returns {Void}
+*/
+function clbk( error, info ) {
+	var str;
+	if ( info ) {
+		process.stderr.write( JSON.stringify( info )+'\n', 'utf8' );
+	}
+	if ( error ) {
+		process.stderr.write( error.message+'\n', 'utf8' );
+		return process.exit( 1 );
+	}
+	str = 'Starred '+slug+'.\n';
+	process.stdout.write( str, 'utf8' );
+	process.exit( 0 );
+}
