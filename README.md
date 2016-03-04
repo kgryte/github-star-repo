@@ -183,7 +183,7 @@ Or, if you have cloned this repository and run `npm install`, modify the command
 
 ``` bash
 $ DEBUG=* node ./bin/cli --token <token> kgryte/utils-deep-get
-# => 'Starred kgryte/utils-deep-get'
+# => 'Starred kgryte/utils-deep-get.'
 ```
 
 
