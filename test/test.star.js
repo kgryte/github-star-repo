@@ -50,6 +50,33 @@ tape( 'function throws if provided a slug argument which is not a string', funct
 	}
 });
 
+tape( 'function throws if not provided a valid repository slug (:owner/:repo)', function test( t ) {
+	var values;
+	var opts;
+	var i;
+
+	values = [
+		'beep',
+		'beep//boop',
+		'beep/boop/bop',
+		'/beep/boop',
+		'b/e/e/p/',
+		'beep/boop/'
+	];
+
+	opts = getOpts();
+	for ( i = 0; i < values.length; i++ ) {
+		t.throws( badValue( values[i] ), Error, 'throws an error when provided ' + values[i] );
+	}
+	t.end();
+
+	function badValue( value ) {
+		return function badValue() {
+			star( value, opts, noop );
+		};
+	}
+});
+
 tape( 'function throws if provided an invalid options argument', function test( t ) {
 	var values;
 	var i;

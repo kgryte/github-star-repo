@@ -21,7 +21,7 @@ var star = require( 'github-star-repo' );
 <a name="star-repo"></a>
 #### star( slug, options, clbk )
 
-[Stars][github-star-repo] a repository.
+[Stars][github-star-repo] a repository corresponding to a provided repository `slug` (`:owner/:repo`).
 
 ``` javascript
 var opts = {

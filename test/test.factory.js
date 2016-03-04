@@ -154,6 +154,35 @@ tape( 'function returns a function which throws if provided a repository slug ar
 	}
 });
 
+tape( 'function returns a function which throws if not provided a valid repository slug (:owner/:repo)', function test( t ) {
+	var values;
+	var opts;
+	var fcn;
+	var i;
+
+	values = [
+		'beep',
+		'beep//boop',
+		'beep/boop/bop',
+		'/beep/boop',
+		'b/e/e/p/',
+		'beep/boop/'
+	];
+
+	opts = getOpts();
+	fcn = factory( opts, noop );
+	for ( i = 0; i < values.length; i++ ) {
+		t.throws( badValue( values[i] ), Error, 'throws an error when provided ' + values[i] );
+	}
+	t.end();
+
+	function badValue( value ) {
+		return function badValue() {
+			fcn( value );
+		};
+	}
+});
+
 tape( 'function returns a function which returns an error to a provided callback if an error is encountered when starring a repository', function test( t ) {
 	var factory;
 	var opts;
