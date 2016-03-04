@@ -205,8 +205,7 @@ tape( 'function returns a function which returns rate limit info to a provided c
 	}
 
 	function done( error, info ) {
-		t.deepEqual( info, expected );
-		t.ok( true, 'deep equal' );
+		t.deepEqual( info, expected, 'deep equal' );
 		t.end();
 	}
 });

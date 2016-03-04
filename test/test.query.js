@@ -99,8 +99,7 @@ tape( 'function returns rate limit info to a provided callback', function test( 
 	}
 
 	function done( error, info ) {
-		t.deepEqual( info, expected );
-		t.ok( true, 'deep equal' );
+		t.deepEqual( info, expected, 'deep equal' );
 		t.end();
 	}
 });
@@ -128,10 +127,7 @@ tape( 'function returns rate limit info to a provided callback (error)', functio
 
 	function done( error, info ) {
 		t.ok( error, 'returns an error' );
-
-		t.deepEqual( info, expected );
-		t.ok( true, 'deep equal' );
-
+		t.deepEqual( info, expected, 'deep equal' );
 		t.end();
 	}
 });
